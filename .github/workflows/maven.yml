@@ -50,14 +50,14 @@ jobs:
     - name: List target folder
       run: ls -a
 
-    - name: List current dir
-      run: cd ./demo
-
-    - name: List target folder
-      run: ls -a
+#    - name: List current dir
+#      run: cd ./demo
+#
+#    - name: List target folder
+#      run: ls -a
 
     - name: Run the Maven verify phase
-      run: mvn compiler:testCompile
+      run: mvn clean verify
 #      mvn dependency:build-classpath
 
 #    _JAVA_OPTIONS=-Djdk.net.URLClassPath.disableClassPathURLCheck=true mvn clean compile package
