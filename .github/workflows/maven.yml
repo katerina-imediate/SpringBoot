@@ -1,0 +1,74 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Set up JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+#        distribution: 'temurin'
+#        cache: maven
+#    - name: Set up the Maven dependencies caching
+#      uses: actions/cache@v3
+#      with:
+#          path: ~/.m2
+#          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+#          restore-keys: ${{ runner.os }}-m2
+
+#    - name: Setup Maven Action
+#      uses:  stCarolas/setup-maven@v5
+#
+#      run: mvn clean test
+
+#    - name: Run tests
+#      run: mvn --batch-mode --update-snapshots verify
+#
+#    - name: Build & run test
+#      id: packaging-jar
+#      shell: bash
+#      run: mvn archetype:generate -DinteractiveMode=true
+    - name: List target folder
+      run: ls -a
+
+    - name: List current dir
+      run: cd ./demo
+
+    - name: List target folder
+      run: ls -a
+
+    - name: Run the Maven verify phase
+      run: mvn compiler:testCompile
+#      mvn dependency:build-classpath
+
+#    _JAVA_OPTIONS=-Djdk.net.URLClassPath.disableClassPathURLCheck=true mvn clean compile package
+
+
+
+    - name: List target folder
+      run: ls -a
+
+
+
+    # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
+#    - name: Update dependency graph
+#      uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
