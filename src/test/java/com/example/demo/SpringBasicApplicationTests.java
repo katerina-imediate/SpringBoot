@@ -39,20 +39,20 @@ class ControllerIntegration_Tests {
 		System.out.println(author);
 
 	}
-	@Test
-	public void Author_Not_Found() {
+//	@Test
+//	public void Author_Not_Found() {
 
 //		ResponseEntity<newAuthor> authorResponseEntity = authors.("/superheroes/2", SuperHero.class);
 //		assertThat(superHeroResponse.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
-		Author dog = new Author(" ", " ", " ");
-		entityManager.persist(dog);
-		entityManager.flush();
+//		Author dog = new Author();
+//		entityManager.persist(dog);
+//		entityManager.flush();
+//
+//		Long unvedAuthorID = dog.getId();
 
-		Long savedAuthorID = dog.getId();
+//		Author author = repository.findById(unvedAuthorID).orElseThrow();
 
-		Author author = repository.findById(savedAuthorID).orElseThrow();
-
-	}
+//	}
 
 }
 

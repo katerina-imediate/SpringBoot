@@ -37,7 +37,7 @@ jobs:
       uses: scacap/action-surefire-report@v1
       if: success() || failure()
       with:
-          report_paths: "/target/reports/surefire.html"
+          report_paths: "${basedir}/target/reports/surefire.html"
 
 
 
