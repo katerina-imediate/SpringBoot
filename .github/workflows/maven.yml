@@ -33,13 +33,9 @@ jobs:
 #      mvn dependency:build-classpath
 #    _JAVA_OPTIONS=-Djdk.net.URLClassPath.disableClassPathURLCheck=true mvn clean compile package
 
-    - name: Build test report
-      uses: simple-elf/allure-report-action@v1.10
-      if: always()
-      with:
-          gh_pages: gh-pages
-          allure_history: allure-history
-          allure_results: build/allure-results
+    - name: Publish Test Report
+      if: success() || failure()
+      uses: scacap/action-surefire-report@v1
 
 
 
