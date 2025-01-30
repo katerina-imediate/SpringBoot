@@ -29,14 +29,13 @@ jobs:
         distribution: 'temurin'
 
     - name: Run the Maven verify phase
-      run: mvn -B package --file pom.xml -Dtest="ControllerIntegration_Tests#Get_By_AuthorId"
+      run: mvn -B package --file pom.xml -Dtest="ControllerIntegration_Tests"
 #      mvn dependency:build-classpath
 #    _JAVA_OPTIONS=-Djdk.net.URLClassPath.disableClassPathURLCheck=true mvn clean compile package
 
-    - name: Create Test Report
-      run: mvn surefire-report:report
-#      if: success() || failure()
-#      uses: scacap/action-surefire-report@v1
+    - name: Generate Test Report
+      if: success() || failure()
+      uses: scacap/action-surefire-report@v1
 
 
 
