@@ -48,10 +48,16 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+
 	<build>
 		<plugins>
-
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
 		</plugins>
+
 	</build>
 	<reporting>
 		<plugins>
@@ -59,7 +65,12 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-report-plugin</artifactId>
 				<version>3.5.2</version>
+				<configuration>
+					<outputDirectory>${basedir}/target/reports/surefire.html</outputDirectory>
+				</configuration>
 			</plugin>
+
+
 		</plugins>
 	</reporting>
 </project>
