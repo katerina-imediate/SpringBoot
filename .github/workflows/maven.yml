@@ -34,8 +34,10 @@ jobs:
 #    _JAVA_OPTIONS=-Djdk.net.URLClassPath.disableClassPathURLCheck=true mvn clean compile package
 
     - name: Generate Test Report
-      if: success() || failure()
       uses: scacap/action-surefire-report@v1
+      if: success() || failure()
+      with:
+          report_paths: "/target/reports/surefire.html"
 
 
 
