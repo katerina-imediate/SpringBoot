@@ -7,6 +7,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.springframework.http.ResponseEntity;
+
 
 
 @ExtendWith(SpringExtension.class)
@@ -37,5 +39,20 @@ class ControllerIntegration_Tests {
 		System.out.println(author);
 
 	}
+	@Test
+	public void Author_Not_Found() {
+
+//		ResponseEntity<newAuthor> authorResponseEntity = authors.("/superheroes/2", SuperHero.class);
+//		assertThat(superHeroResponse.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+		Author dog = new Author(" ", " ", " ");
+		entityManager.persist(dog);
+		entityManager.flush();
+
+		Long savedAuthorID = dog.getId();
+
+		Author author = repository.findById(savedAuthorID).orElseThrow();
+
+	}
+
 }
 

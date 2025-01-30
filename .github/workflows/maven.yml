@@ -27,48 +27,19 @@ jobs:
       with:
         java-version: 17
         distribution: 'temurin'
-#        cache: maven
-#    - name: Set up the Maven dependencies caching
-#      uses: actions/cache@v3
-#      with:
-#          path: ~/.m2
-#          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-#          restore-keys: ${{ runner.os }}-m2
-
-#    - name: Setup Maven Action
-#      uses:  stCarolas/setup-maven@v5
-#
-#      run: mvn clean test
-
-#    - name: Run tests
-#      run: mvn --batch-mode --update-snapshots verify
-#
-#    - name: Build & run test
-#      id: packaging-jar
-#      shell: bash
-#      run: mvn archetype:generate -DinteractiveMode=true
-    - name: List target folder
-      run: ls -a
-
-#    - name: List current dir
-#      run: cd ./demo
-#
-#    - name: List target folder
-#      run: ls -a
 
     - name: Run the Maven verify phase
-      run: mvn clean verify
+      run: mvn -B package --file pom.xml -Dtest="ControllerIntegration_Tests#Get_By_AuthorId"
 #      mvn dependency:build-classpath
-
 #    _JAVA_OPTIONS=-Djdk.net.URLClassPath.disableClassPathURLCheck=true mvn clean compile package
 
+    - name: Build test report
+      uses: simple-elf/allure-report-action@v1.10
+      if: always()
+      with:
+          gh_pages: gh-pages
+          allure_history: allure-history
+          allure_results: build/allure-results
 
 
-    - name: List target folder
-      run: ls -a
 
-
-
-    # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
-#    - name: Update dependency graph
-#      uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
