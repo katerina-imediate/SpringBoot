@@ -35,11 +35,10 @@ jobs:
 
     - name: Generate Test Report
       uses: scacap/action-surefire-report@v1
-      if: success() || failure()
-      with:
-        include_passed: true
-        detailed_summary: true
-        summary: '<table><thead><tr><th> Application (src/applications) </th></tr></thead><tbody><tr><td> test </td></tr></tbody></table>'
-        check_title_template: '{{SUITE_NAME}} | {{TEST_NAME}}'
-        annotate_only: ${{ github.event_name == 'workflow_dispatch' }}
+    -  run: |
         report_paths: "**/surefire-reports/TEST-*.xml"
+        echo "This is the lead in sentence for the list" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY # this is a blank line
+        echo "- Lets add a bullet point" >> $GITHUB_STEP_SUMMARY
+        echo "- Lets add a second bullet point" >> $GITHUB_STEP_SUMMARY
+        echo "- How about a third one?" >> $GITHUB_STEP_SUMMARY
