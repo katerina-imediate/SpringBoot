@@ -5,8 +5,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+
 import org.springframework.http.ResponseEntity;
 
 
@@ -39,20 +44,31 @@ class ControllerIntegration_Tests {
 		System.out.println(author);
 
 	}
-//	@Test
-//	public void Author_Not_Found() {
+	@Test
+	public void Author_Update() {
 
-//		ResponseEntity<newAuthor> authorResponseEntity = authors.("/superheroes/2", SuperHero.class);
-//		assertThat(superHeroResponse.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
-//		Author dog = new Author();
-//		entityManager.persist(dog);
-//		entityManager.flush();
-//
-//		Long unvedAuthorID = dog.getId();
+		Author john = new Author("John", "Doe", "missing");
+		entityManager.persist(john);
+		entityManager.flush();
 
-//		Author author = repository.findById(unvedAuthorID).orElseThrow();
+		Long savedid = john.getId();
+		assertEquals("missing", john.getRole());
 
-//	}
+		john.setFirstName("Bob");
+		john.setLastName("Marley");
+		john.setRole("singer");
+
+		Author author = repository.findById(savedid).orElseThrow();
+		assertEquals(savedid, author.getId());
+		assertEquals("Bob", author.getFirstName());
+		assertEquals("Marley", author.getLastName());
+		assertEquals("singer", author.getRole());
+		System.out.println(john);
+
+
+
+
+	}
 
 }
 
