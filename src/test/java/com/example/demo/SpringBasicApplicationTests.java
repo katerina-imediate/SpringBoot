@@ -5,15 +5,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
-
-import org.springframework.http.ResponseEntity;
-
 
 
 @ExtendWith(SpringExtension.class)
@@ -58,8 +51,11 @@ class ControllerIntegration_Tests {
 		john.setLastName("Marley");
 		john.setRole("singer");
 
+		Long savdid = john.getId();
+		System.out.println(savedid);
+
 		Author author = repository.findById(savedid).orElseThrow();
-		assertEquals(savedid, author.getId());
+		assertEquals(savdid, author.getId());
 		assertEquals("Bob", author.getFirstName());
 		assertEquals("Marley", author.getLastName());
 		assertEquals("singer", author.getRole());

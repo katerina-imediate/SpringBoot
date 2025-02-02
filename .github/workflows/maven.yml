@@ -30,8 +30,7 @@ jobs:
 
     - name: Run the Maven verify phase
       run: mvn -B package --file pom.xml -Dtest="ControllerIntegration_Tests"
-#      mvn dependency:build-classpath
-#    _JAVA_OPTIONS=-Djdk.net.URLClassPath.disableClassPathURLCheck=true mvn clean compile package
+
 
     - name: Generate Test Report
       uses: scacap/action-surefire-report@v1
